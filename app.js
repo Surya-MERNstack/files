@@ -11,3 +11,4 @@ fs.ensureDir(folderPath)
   .then(() => fs.appendFile(filePath, timestamp, 'utf8'))
   .then(() => console.log(`Timestamp data added to ${timestamp} successfully.`))
   .catch((err) => console.error('Error adding timestamp data:', err));
+ 
