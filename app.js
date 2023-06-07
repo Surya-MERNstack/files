@@ -1,4 +1,4 @@
-const fs = require('fs-extra');
+const fs = require('fs');
 const path = require('path');
 
 const folderPath = 'files';
@@ -7,8 +7,11 @@ const timestamp = currentDate.toUTCString();
 const filename = 'time.txt';
 const filePath = path.join(folderPath, filename);
 
-fs.ensureDir(folderPath)
-  .then(() => fs.appendFile(filePath, timestamp, 'utf8'))
-  .then(() => console.log(`Timestamp data added to ${timestamp} successfully.`))
-  .catch((err) => console.error('Error adding timestamp data:', err));
- 
+try {
+  fs.mkdirSync(folderPath, { recursive: true });
+  fs.writeFileSync(filePath, timestamp, 'utf8');
+  console.log(`Timestamp data added to ${timestamp} successfully.`);
+  // Additional code or operations can be added here
+} catch (err) {
+  console.error('Error adding timestamp data:', err);
+}
